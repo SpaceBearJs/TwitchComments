@@ -5,23 +5,22 @@ let listenForCount=false;
 var msg = new SpeechSynthesisUtterance();
 var voices = window.speechSynthesis.getVoices();
 msg.lang = 'es-ES';
-localStorage.setItem("cantidad", 150);
-var anteriorUser='';
+var cantidadMax=150;
 
 var client= new tmi.Client({
     connection:{
         secure:true,
         reconnect:true
-    }
+    },
+    channels: [nomStreamer]
 });
 
 client.on('message',(channel, tags, mess, self) =>{
 
     if(self) return;
     let contador=nombTest.children.length;
-    let numMax= localStorage.getItem('cantidad');
 
-    if(contador>=numMax && nombTest.hasChildNodes()){
+    if(contador>=cantidadMax && nombTest.hasChildNodes()){
         nombTest.firstElementChild.remove();
     }
 
@@ -30,20 +29,20 @@ client.on('message',(channel, tags, mess, self) =>{
     nombTest.scrollTop= alturaScroll;
     msg.text = '';
 
-    // if(mess==='!leer'){
-    //     listenForCount=true;
-    //     msg.text = 'Bot activado';
-    // }else if (mess==='!terminar'){
-    //     listenForCount=false;
-    //     msg.text = 'Bot desactivado';
-    // }
-    // else if (listenForCount){
-    //     msg.text = tags.username+ ' dijo '+mess;
-    // }
-    // console.log(mess);
-    // if(msg.text != ''){
-    //     speechSynthesis.speak(msg);
-    // }
+    if(mess==='!leer'){
+        listenForCount=true;
+        msg.text = 'Bot activado';
+    }else if (mess==='!terminar'){
+        listenForCount=false;
+        msg.text = 'Bot desactivado';
+    }
+    else if (listenForCount){
+        msg.text = tags.username+ ' dijo '+mess;
+    }
+    console.log(mess);
+    if(msg.text != ''){
+        speechSynthesis.speak(msg);
+    }
     
 });
 
@@ -55,8 +54,6 @@ function mostrar(clase){
         confTwitch.style.display='none';
     }else{
         confTwitch.style.display='';
-        document.querySelector('.streamer').value = localStorage.getItem('streamer');
-        document.querySelector('.numMensajes').value = localStorage.getItem('cantidad');
     }
 
 }
@@ -66,21 +63,23 @@ function empezar(){
     let cantidad = localStorage.getItem('cantidad');
     let nom = document.querySelector('.streamer');
 
-    if(anteriorUser!=''){
-        client.part(anteriorUser);
-    }
 
     if(!stream){
         validacion(nom);
     }
-    if(cantidad!=150){
+    if(cantidad){
         cantidadMax=cantidad;
     }
-    client.connect()
-    .then((data) => {
-        client.join(stream)
-        anteriorUser=stream;
-    });
+
+    client= new tmi.Client({
+        connection:{
+            secure:true,
+            reconnect:true
+        },
+        channels: [stream]
+    })
+
+    client.connect();
 }
 
 
@@ -90,13 +89,12 @@ function guardarInfo(){
     validacion(nom);
     localStorage.setItem("streamer", nom.value);
     localStorage.setItem("cantidad", cant.value);
-    mostrar('config');
 }
 
 
 function validacion(nom){
     let cnf=document.querySelector('.config');
-    if(nom.value==''){
+    if(nom.value=''){
         alert('Debes especificar el nombre del Streamer');
         cnf.style.display='';
         nom.focus();

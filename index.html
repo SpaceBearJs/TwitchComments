@@ -16,7 +16,27 @@
         <img src="img/logo.png" class="titulo">
     </div>
     <div class="container">
+        <img src="img/cfg.png" class="cfg" onclick="mostrar('config')">
+        <img src="img/play.png" class="play" onclick="empezar()">
         <div id="Personas" class="personas"/></div>
+    </div>
+    <div class="config" style="display:none">
+        <a class="cerrar" onclick="mostrar('config')">ˣ</a> 
+        <div class="config-titulo">CONFIGURACION</div>
+        <div class="config-data">
+            <div>
+                Streamer: <input type="text" class='streamer texto' placeholder="Nombre de Twitch">
+            </div>
+            <br/><br/>
+            <div>
+                Num Mensajes: <input type="text" class='numMensajes texto' placeholder="Por defecto 150">
+            </div>
+            <br/><br/>
+            <div>
+                <input type="submit" value="Aceptar" class='texto' onclick="guardarInfo()">
+            </div>
+        </div>
+        
     </div>
     <script src="src/tmi.min.js"></script>
     <script src="src/app.js"></script>
