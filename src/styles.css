@@ -6,11 +6,18 @@ body{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.titulo{
-    display: block;
+div.titulo{
+    display: flexbox;
     padding: 0%;
     margin: auto;
-    margin-top: 1vh;
+    margin-top: 2vh;
+    width: calc(10vh-100px);
+}
+
+img.titulo{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 #mensajes{
@@ -27,16 +34,18 @@ body{
     padding: 0%;
     margin: auto;
     margin-top: 4vh;
-    width: 100vh;
+    width: 50vw;
     height: calc(100vh - 250px);
     border-radius: 3%;
     border: solid rgb(67, 4, 119) 5px;
 }
 .personas{
     margin: 1vh;
-    height: calc(100vh - 280px);
-    width: calc(100vh - 30px);
+    display: flexbox;
     overflow: scroll;
+    padding: 0%;
+    width: 50vw;
+    height: calc(100vh - 270px);
     overflow-x: hidden;
     scrollbar-color: #6969dd #e0e0e0;
     scrollbar-width: thin;
@@ -61,26 +70,12 @@ body{
 }
 
 /**Iconos**/
-.cfg{
-        position:fixed;
-        right:3vh;
-        bottom: 4vh;
-        width: 5vh;
-        height: 5vh;
-}
 
-.play{
-    position:fixed;
-    right:3vh;
-    bottom: 10vh;
-    width: 5vh;
-    height: 5vh;
-}
 
 .apagarEncender{
     position:fixed;
     right:3vh;
-    top: 5vh;
+    top: 3vh;
     width: 10vh;
     height: 10vh;
 }
@@ -103,7 +98,7 @@ body{
 
 .config-data{
     position:absolute;
-    width: 30vh;
+    width: 30vw;
     height: 30vh;
     top:10vh;
     left:5vh;
@@ -134,3 +129,222 @@ body{
     position:absolute;
     right:1vh;
 }
+
+
+@media only screen and (min-width: 500px) {
+
+    .cfg{
+        position:fixed;
+        left:1.5vh;
+        top: 3vh;
+        width: 4vh;
+        height: 4vh;
+    }
+
+    .play{
+        position:fixed;
+        left:1.5vh;
+        top: 9vh;
+        width: 4vh;
+        height: 4vh;
+    }
+
+    .container{
+        width: 90%;
+        height: 80vh;
+    }
+    .personas{
+        width: 96%;
+        height: 97%;
+    }
+    .apagarEncender{
+        position:fixed;
+        right:1vh;
+        top: 1vh;
+        width: 4vh;
+        height: 4vh;
+    }
+    img.titulo{
+        display: block;
+        margin-top: 2vh;
+        width: 32vh;
+    }
+    input.texto{
+        position:fixed;
+        right:10vh;
+        width: 15vh;
+    }
+}
+  @media only screen and (min-width: 700px) {
+    .container{
+        width: 90%;
+        height: 80vh;
+    }
+    .personas{
+        width: 97%;
+        height: 97%;
+    }
+    .apagarEncender{
+        position:fixed;
+        right:1vh;
+        top: 1vh;
+        width: 6vh;
+        height: 6vh;
+    }
+
+    img.titulo{
+        display: block;
+        margin-top: 2vh;
+        width: 32vh;
+    }
+
+    input.texto{
+        position:fixed;
+        right:10vh;
+        width: 15vh;
+    }
+  }
+  @media only screen and (min-width: 900px) {
+
+    .container{
+        width: 85%;
+        height: 80vh;
+    }
+    .personas{
+        width: 98%;
+        height: 97%;
+    }
+    .apagarEncender{
+        position:fixed;
+        right:1vh;
+        top: 1vh;
+        width: 8vh;
+        height: 8vh;
+    }
+    
+    .cfg{
+        position:fixed;
+        right:3vh;
+        bottom: 4vh;
+        width: 5vh;
+        height: 5vh;
+    }
+
+    .play{
+        position:fixed;
+        right:3vh;
+        bottom: 10vh;
+        width: 5vh;
+        height: 5vh;
+    }
+    img.titulo{
+        display: block;
+        margin-top: 2vh;
+        width: 32vh;
+    }
+    input.texto{
+        position:fixed;
+        right:10vh;
+        width: 15vh;
+    }
+  }
+
+  @media only screen and (min-width: 1300px){
+    
+    .cfg{
+        position:fixed;
+        left:4vh;
+        bottom: 4vh;
+        width: 5.5vh;
+        height: 5.5vh;
+    }
+
+    .play{
+        position:fixed;
+        left:4vh;
+        bottom: 18vh;
+        width: 5.5vh;
+        height: 5.5vh;
+    }
+
+    .container{
+        width: 50vw;
+        height: 80vh;
+    }
+    .personas{
+        width:97.5%;
+        height: 97%;
+    }
+
+    .apagarEncender{
+        position:fixed;
+        right:3vh;
+        top: 3vh;
+        width: 10vh;
+        height: 10vh;
+    }
+
+    img.titulo{
+        display: block;
+        margin-top: 2vh;
+        width: 32vh;
+    }
+  }
+
+  @media only screen and (max-width: 490px) and (max-height: 850px) {
+    img.titulo{
+        display: block;
+        margin-top: 2vh;
+        width: 32vh;
+    }
+    div.titulo{
+        width:99vw;
+        align-items: center;
+    }
+    .cfg{
+        width: 3.5vh;
+        height: 3.5vh;
+        bottom: 1vh;
+        margin-top: 1.5vh;
+        margin-left: 6vh; 
+    }
+
+    .play{
+        width: 3.5vh;
+        height: 3.5vh;
+        margin-top: 1.5vh;
+        margin-left: -9vh;        
+    }
+
+    .container{
+        width: 95%;
+        height: 78vh;
+    }
+    .personas{
+        width:96%;
+        height: 90%;
+    }
+    .apagarEncender{
+        position:fixed;
+        right:1vh;
+        top: 2vh;
+        width: 4vh;
+        height: 4vh;
+    }
+    
+    .config{
+        position:fixed;
+        right:3vh;
+        top: 20vh;
+        width: 38vh;
+        height: 38vh;
+        background-color: rgba(241, 241, 241, 0.795);
+        border-radius: 2%;
+    }
+
+    input.texto{
+        position:absolute;
+        left:15vh;
+        width: 10vh;
+    }
+  }
