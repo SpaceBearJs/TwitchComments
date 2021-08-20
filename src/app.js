@@ -1,5 +1,6 @@
 const nombTest = document.querySelector('#Personas');
-var nomStreamer='';
+const avisoImg = document.querySelector('.apagarEncender');
+
 //Config bot de audio
 let listenForCount=false;
 var msg = new SpeechSynthesisUtterance();
@@ -12,9 +13,10 @@ var client= new tmi.Client({
     connection:{
         secure:true,
         reconnect:true
-    }
+    },
+    channels: []
 });
-
+client.connect();
 client.on('message',(channel, tags, mess, self) =>{
 
     if(self) return;
@@ -26,8 +28,13 @@ client.on('message',(channel, tags, mess, self) =>{
     }
 
     nombTest.innerHTML += `<p id='mensajes'><b class='users${tags.username}' style='color:${randomColor()}'>${tags.username}</b> : ${mess}</p>`
+    
+    let minScroll = nombTest.scrollTop;
     let alturaScroll = nombTest.scrollHeight;
-    nombTest.scrollTop= alturaScroll;
+    if(minScroll != alturaScroll){
+        nombTest.scrollTop= alturaScroll;
+    }
+
     msg.text = '';
 
     // if(mess==='!leer'){
@@ -66,21 +73,51 @@ function empezar(){
     let cantidad = localStorage.getItem('cantidad');
     let nom = document.querySelector('.streamer');
 
-    if(anteriorUser!=''){
-        client.part(anteriorUser);
-    }
-
     if(!stream){
         validacion(nom);
     }
-    if(cantidad!=150){
-        cantidadMax=cantidad;
+    if(cantidad){
+        if(cantidad!=150){
+            cantidadMax=cantidad;
+        }
     }
-    client.connect()
-    .then((data) => {
-        client.join(stream)
-        anteriorUser=stream;
-    });
+    
+    if(anteriorUser==stream){     
+        if(!client._isConnected()){
+            client.connect()
+                .then(()=>{
+                avisoImg.src = 'img/encendido.png';
+                console.log('Se conectado el servidor');
+                });
+        }else{
+            client.disconnect()
+                .then(()=>{
+            avisoImg.src = 'img/apagado.png';
+            console.log('Se desconecto el servidor');
+            });
+        }
+    }else{
+        if(!client._isConnected()){
+            client.connect().then(()=>{
+                client.join(stream)
+                    .then((data) => {
+                        client.part(anteriorUser);
+                        anteriorUser=stream;
+                        avisoImg.src = 'img/encendido.png';
+                        console.log('Se conectó al nuevo servidor');
+                    });
+            });
+        }else{
+            client.join(stream)
+            .then((data) => {
+                client.part(anteriorUser);
+                anteriorUser=stream;
+                avisoImg.src = 'img/encendido.png';
+                console.log('Se conectó al nuevo servidor');
+            });
+        }
+    }
+    
 }
 
 

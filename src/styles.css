@@ -60,6 +60,7 @@ body{
     border-radius: 100px;
 }
 
+/**Iconos**/
 .cfg{
         position:fixed;
         right:3vh;
@@ -74,6 +75,14 @@ body{
     bottom: 10vh;
     width: 5vh;
     height: 5vh;
+}
+
+.apagarEncender{
+    position:fixed;
+    right:3vh;
+    top: 5vh;
+    width: 10vh;
+    height: 10vh;
 }
 
 .play:hover{
